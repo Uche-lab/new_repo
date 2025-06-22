@@ -1,0 +1,226 @@
+{
+	"info": {
+		"_postman_id": "ef3eb02c-3fc5-41a9-8a2d-96472cb47bdd",
+		"name": "Test_Collection",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Get Objects",
+			"item": [
+				{
+					"name": "Get Objects - List",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "071606c8-d7c1-470f-b934-25d899db9396",
+								"exec": [
+									"const response = pm.response.json();",
+									"",
+									"// pm.collectionVariables.set(\"user_password\", response.password);",
+									"",
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Response contains user info\", function () {",
+									"    pm.expect(response).to.be.an(\"array\");",
+									"//     pm.expect(response).to.have.property(\"email\").that.is.a(\"string\");",
+									"//     pm.expect(response).to.have.property(\"password\").that.is.a(\"string\");",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "c57df750-62f4-40ac-8222-edc2764b8f53",
+								"exec": [
+									"const base_url = \"https://api.restful-api.dev\"",
+									"pm.collectionVariables.set(\"baseurl\", base_url);"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"id": "486c049c-e97a-4bb4-b237-d93d8bfea417",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "{{baseurl}}/objects"
+					},
+					"response": []
+				},
+				{
+					"name": "Get an Object - Single User",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "9d2b6bfb-1990-482b-ac2b-ba0091b3418b",
+								"exec": [
+									"const response = pm.response.json();",
+									"",
+									"// pm.collectionVariables.set(\"user_password\", response.password);",
+									"",
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Response contains user info\", function () {",
+									"    pm.expect(response).to.be.an(\"object\");",
+									"    pm.expect(response).to.have.property(\"id\").that.is.a(\"string\");",
+									"    pm.expect(response).to.have.property(\"name\").that.is.a(\"string\");",
+									"    pm.expect(response.data).to.be.an(\"object\")",
+									"//     pm.expect(response).to.have.property(\"email\").that.is.a(\"string\");",
+									"//     pm.expect(response).to.have.property(\"password\").that.is.a(\"string\");",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"id": "7923bb53-d220-4a3c-b8aa-09794822200b",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "{{baseurl}}/objects/7"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Object - Not Found",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "4fe39663-467f-4740-afc8-09e64df09246",
+								"exec": [
+									"// const response = pm.response.json();",
+									"",
+									"// pm.collectionVariables.set(\"user_password\", response.password);",
+									"",
+									"pm.test(\"Status code is 404\", function () {",
+									"    pm.response.to.have.status(404);",
+									"});",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"id": "766c2aac-4271-45e9-8e1a-ad3d48766866",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "{{baseurl}}/objects/90"
+					},
+					"response": []
+				}
+			],
+			"id": "c77c1ba3-b638-408f-9104-15bc80a4b670"
+		},
+		{
+			"name": "Add an Object",
+			"item": [
+				{
+					"name": "Add an Object",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "fcc8a4cb-5ae1-46e5-a5eb-a4bbf1c42d1a",
+								"exec": [
+									"const response = pm.response.json();",
+									"// pm.collectionVariables.set(\"id\", \"id\");",
+									"",
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Response contains user info\", function () {",
+									"    pm.expect(response).to.be.an(\"object\");",
+									"    pm.expect(response).to.have.property(\"id\").that.is.a(\"string\");",
+									"});",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"id": "c97657a4-bf3a-4060-81ab-7e5bb7b1f89d",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Apple MacBook Pro 16\",\n    \"data\": {\n        \"year\": 2019,\n        \"price\": 1849.99,\n        \"CPU model\": \"Intel Core i9\",\n        \"Hard disk size\": \"1 TB\"\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{baseurl}}/objects"
+					},
+					"response": []
+				}
+			],
+			"id": "c51f2143-f46b-4317-ba56-04fce89c5347"
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "21286b34-94fb-4c68-86e3-cb8c792946d1",
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "2a1c919f-21e6-483a-9e97-5a01dae356f1",
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseurl",
+			"value": "https://reqres.in",
+			"type": "default"
+		},
+		{
+			"key": "id",
+			"value": ""
+		}
+	]
+}
